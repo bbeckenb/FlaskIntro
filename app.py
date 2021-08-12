@@ -1,4 +1,4 @@
-"""Blogly application."""
+"""Login Authentification application."""
 
 from flask import Flask, jsonify, redirect, render_template, request, flash, session
 import flask
@@ -11,10 +11,8 @@ import re
 
 app = Flask(__name__)
 uri = os.getenv("DATABASE_URL")  # or other relevant config var
-if uri.startswith("postgres://"):
-    uri = uri.replace("postgres://", "postgresql:///", 1)
 # rest of connection code using the connection string `uri`
-app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', 'postgresql:///user_feedback_db') # defaults to the one on right for dev, left is one you set with heroku addons:create heroku-postgresql:hobby-dev #hobby-dev is exactly as it should be
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', 'postgres:///user_feedback_db').replace("://", "ql://", 1) # defaults to the one on right for dev, left is one you set with heroku addons:create heroku-postgresql:hobby-dev #hobby-dev is exactly as it should be
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SQLALCHEMY_ECHO'] = True
 
