@@ -42,12 +42,15 @@ class ViewFunctionFlaskTestCase(TestCase):
         User.query.delete()
         Feedback.query.delete()
 
-    def test_redirect_to_register_page(self):
+    def test_rendering_of_welcome_page(self):
         with app.test_client() as client:
             res = client.get('/') 
-
-            self.assertEqual(res.status_code, 302) #reroute
-            self.assertEqual(res.location, 'http://localhost/register')
+            html = res.get_data(as_text=True)
+            
+            self.assertEqual(res.status_code, 200) #reroute
+            self.assertEqual(res.location, 'http://localhost/')
+            self.assertIn('Username', html)
+            self.assertIn('Password', html)
 
 
     def test_rendering_of_registration_form(self):

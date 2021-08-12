@@ -23,8 +23,8 @@ debug = DebugToolbarExtension(app)
 
 #Example View Functions
 @app.route('/')
-def redirect_to_registration():
-    return redirect('/register')
+def render_welcome():
+    return render_template('welcome.html')
 
 @app.route('/register', methods=['GET', 'POST'])
 def display_registration_form():
